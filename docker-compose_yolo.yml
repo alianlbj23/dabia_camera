@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  navigation:
+    image: my_ultralytics_image:latest
+    # environment:
+    #   - ROS_DOMAIN_ID
+    volumes:
+      - ./ros2_yolov8:/workspaces/demo
+    networks:
+      - my_bridge_network
+    command: "ros2 launch /workspace/demo/navigation.xml"
+
+# This will create a docker bridge network
+# docker network create --driver bridge pros_app_my_bridge_network
+# You can see the network by docker network ls
+networks:
+  my_bridge_network:
+    driver: bridge
